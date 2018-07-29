@@ -153,6 +153,13 @@ export default{
 }
 </script>
 <style scoped>
+.sales-board {
+	width: 100%;
+}
+.sales-board-p {
+	width: 100%;
+	white-space: pre-wrap;
+}
 .buy-dialog-title {
 	font-size: 16px;
 	font-weight: bold;
@@ -181,5 +188,8 @@ export default{
 	display: inline-block;
 	padding: 10px 20px;
 	cursor: pointer;
+}
+@media only screen and (max-width: 480px) {
+
 }
 </style>

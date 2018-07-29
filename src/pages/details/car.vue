@@ -1,6 +1,6 @@
 <template>
-	<div >
-		品牌营销:{{ getOrder }}
+	<div  class="car">
+		<p>品牌营销:{{ getOrder }}</p>
 	</div>
 </template>
 <script>
@@ -18,4 +18,13 @@ export default{
 }
 </script>
 <style >
+@media only screen and (max-width: 700px) {
+	/*.car{
+		width: 100%;
+	}*/
+	/*.car p {
+		width: 325px;
+		word-break: break-all;
+	}*/
+}
 </style>

@@ -55,7 +55,7 @@ export default {
 <style>
 
 .detail-wrap {
-	width: 1200px;
+	width: 100%;
 	margin: 0 auto;
 	overflow: hidden;
 	padding-top: 20px;
@@ -64,11 +64,13 @@ export default {
 	float: left;
 	width: 200px;
 	text-align: center;
+	margin-left: 3%;
 }
 .detail-right {
 	float: left;
-	width: 980px;
-	margin-left: 20px;
+	width: 74%;
+	margin-left: 2%;
+	padding-right: 1%;
 }
 .product-board {
 	background: #fff;
@@ -76,6 +78,7 @@ export default {
 }
 .product-board ul {
 	margin-top: 20px;
+	list-style: none;
 }
 .product-board li {
 	text-align: left;
@@ -116,7 +119,7 @@ export default {
 }
 .sales-board-line-right {
 	display: inline-block;
-	width: 75%;
+/*	width: 75%;*/
 }
 .sales-board-des {
 	border-top: 20px solid #f0f2f5;
@@ -148,5 +151,73 @@ export default {
 .sales-board-table td {
 	border: 1px solid #f0f2f5;
 	padding: 15px;
+}
+@media only screen and (max-width: 1024px) {
+	.detail-right {
+	float: left;
+	width: 68%;
+	margin-left: 1%;
+	padding-right: 1%;
+	}
+	.detail-left {
+	float: left;
+	width: 200px;
+	text-align: center;
+	margin-left: 1.5%;
+	}
+}
+@media only screen and (min-width: 520px) and (max-width: 770px) {
+	.detail-right {
+	float: left;
+	width: 65%;
+	margin-left: 1%;
+	padding-right: 1%;
+	}
+	.detail-left {
+	float: left;
+	width: 160px;
+	text-align: center;
+	margin-left: 1%;
+	}
+	.sales-board-line-left {
+	display: inline-block;
+	width: 70px;
+	}
+	.sales-board-line-right {
+	display: inline-block;
+}
+}
+/*@media only screen and (min-width: 460px) and (max-width: 520px) {
+	.detail-right {
+	float: left;
+	width: 100%;
+	margin-top: 5%;
+	}
+	.detail-left {
+	float: left;
+	width: 90%;
+	text-align: center;
+	margin-left: 5%;
+	}
+	.sales-board-line-left {
+	display: inline-block;
+	width: 90px;
+	}
+}*/
+@media only screen and (max-width: 520px) {
+	.detail-right {
+	width: 100%;
+	margin-top: 5%;
+	}
+	.detail-left {
+	float: left;
+	width: 100%;
+	text-align: center;
+	margin-left: 1px;
+	}
+	.sales-board-line-left {
+	display: inline-block;
+	width: 70px;
+	}
 }
 </style>

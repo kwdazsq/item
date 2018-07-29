@@ -31,16 +31,18 @@
 	background : #363636;
 	color : #b2b2b2;
 	height : 90px;
-	line-height : 60px;
+	line-height : 90PX;
 	width : 100%;
 }
 .head-inner {
-	width : 1200px;
-	margin : 0 auto;
+	/*width : 1200px;*/
+	width : 100%;
+	/*margin : 0 auto;*/
 }
 .head-inner img {
-	width : 50px;
+	width :50px;
 	margin-top : 20px;
+	margin-left: 5%;
 }
 .head-inner span{
 	position : relative;
@@ -48,6 +50,8 @@
 }
 .head-nav {
 	float : right;
+	width : 20%;
+	margin-right: 3%;
 }
 .head-list {
 	    list-style: none;
@@ -59,4 +63,46 @@
 .list-pile {
 	padding : 0 10px;
 	}
+@media only screen and (max-width: 1024px) {
+	.head {
+	background : #FFFF00;
+	color : #b2b2b2;
+	height : 90px;
+	line-height : 90PX;
+	width : 100%;
+	}
+	.head-nav {
+	width : 25%;
+	}
+}
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+	.head {
+	background : #EE82EE;
+	color : #b2b2b2;
+	height : 90px;
+	line-height : 90PX;
+	width : 100%;
+	}
+	.head-inner span{
+		font-size: 0px;
+	}
+	.head-nav {
+	width : 35%;
+	}
+}
+@media only screen and (max-width: 425px) {
+	.head {
+	background : #00FFFF;
+	color : #b2b2b2;
+	height : 90px;
+	line-height : 90PX;
+	width : 100%;
+	}
+	.head-inner span{
+		font-size: 0px;
+	}
+	.head-nav {
+	width : 50%;
+	}
+}
 </style>

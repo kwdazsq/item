@@ -36,7 +36,8 @@
 	float : center;
 }
 .foot-nav ul {
-	margin-left: 37.8%;
+	width: 260px;
+	margin:0 auto;
 }
 .foot-nav li {
 	cursor : pointer;
@@ -49,5 +50,10 @@
 	padding : 0 3px;
 }
 .foot span{
+}
+@media only screen and  (max-width: 768px) {
+	.foot span {
+		font-size: 0px;
+	}
 }
 </style>
