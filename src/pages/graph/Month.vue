@@ -10,113 +10,72 @@
 		name: 'month',
 		data () {
 			return {
-				data:[],
-			}
-		},
-		created:function () {
-			this.$axios.post('http://47.75.66.0:80/interview_api/price_time_series', {
-				type:'one_month',
-			})
-			.then(res => {
-				this.data = res.data;
-				this.yue();
-				this.charts.setOption({
-					series: [{
-						data: this.data
-					}]
-				});
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-		},
-		methods:{
-			drawPie(id){
-			 	this.charts = echarts.init(document.getElementById(id))
-				this.charts.setOption({
-				tooltip: {
-					trigger: 'axis',
-					formatter: function (params) {
-						params = params[0];
-						var date = new Date(params.value[0]);
-						return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-					},
-					axisPointer: {
-						animation: false
-					}
-				},
-				xAxis: {
-					type: 'time',
-					splitLine: {
-						show: false
-					},
-					maxInterval: 3600 * 24 * 1000,
-					axisLabel: {
-	        	 		formatter: function (value, index) {
-							var date = new Date(value);
-							if(date.getHours() === 0 && date.getMinutes() === 0){
-								return (date.getMonth()+1) + '.' + date.getDate() ;
-							}
-						},
-					},
-				},
-				yAxis: {
-					type: 'value',
-					boundaryGap: [0, '100%'],
-					position:'right'
-				},
-				series: [{
-					name: '模拟数据',
-					type: 'line',
-					showSymbol: false,
-					hoverAnimation: false,
-					data: this.data
-				}]
-			   })
-			},
-			yue(){
-				var $data = [];
-				var $len = this.data.market_line.length;
-				for(var $i=0; $i<$len; $i++){
-					var $value = {
-						value: [
-							this.data.market_line[$i].timestamp,
-							this.data.market_line[$i].price*1000
-						]
-					};
-					$data.push($value);
-				}
-				this.data = $data;
-			},
-			getDatas(){
-				let that = this;
-				setInterval(function () {
-					that.$axios.post('http://47.75.66.0:80/interview_api/price_time_series', {
-						type:'one_month',
-					 })
-					 .then(res => {
-						that.data = res.data;
-						that.yue();
-					 })
-					 .catch(function (error) {
-						console.log(error);
-					 });
-					that.charts.setOption({
-						series: [{
-							data: that.data
-						}]
-					});
-				}, 1000*3600);
-			},
-		},
-		//调用
-		mounted(){
-			this.$nextTick(function() {
-				this.drawPie('main')
-			})
-			this.getDatas()
-		}
-	}
+				                charts: '',
+                opinion:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+                opinionData:[
+                  {value:335, name:'直接访问'},
+                  {value:310, name:'邮件营销'},
+                  {value:234, name:'联盟广告'},
+                  {value:135, name:'视频广告'},
+                  {value:1548, name:'搜索引擎'}
+                ]
+            }
+        },
+        methods:{
+            drawPie(id){
+               this.charts = echarts.init(document.getElementById(id))
+               this.charts.setOption({
+                 tooltip: {
+                   trigger: 'item',
+                   formatter: '{a}<br/>{b}:{c} ({d}%)'
+                 },
+                 legend: {
+                   orient: 'vertical',
+                   x: 'left',
+                   data:this.opinion
+                 },
+                 series: [
+                   {
+                     name:'访问来源',
+                     type:'pie',
+                     radius:['50%','70%'],
+                     avoidLabelOverlap: false,
+                     label: {
+                       normal: {
+                         show: false,
+                         position: 'center'
+                       },
+                       emphasis: {
+                         show: true,
+                         textStyle: {
+                           fontSize: '30',
+                           fontWeight: 'blod'
+                         }
+                       }
+                     },
+                     labelLine: {
+                       normal: {
+                         show: false
+                       }
+                     },
+                     data:this.opinionData
+                   }
+                 ]
+               })
+            }
+        },
+      //调用
+        mounted(){
+            this.$nextTick(function() {
+                this.drawPie('main')
+            })
+        }
+    }
 </script>
 <style scoped>
+* {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 </style>

@@ -65,7 +65,7 @@
 	}
 @media only screen and (max-width: 1024px) {
 	.head {
-	background : #FFFF00;
+	background : #363636;
 	color : #b2b2b2;
 	height : 90px;
 	line-height : 90PX;
@@ -77,7 +77,7 @@
 }
 @media only screen and (min-width: 426px) and (max-width: 768px) {
 	.head {
-	background : #EE82EE;
+	background :#363636;
 	color : #b2b2b2;
 	height : 90px;
 	line-height : 90PX;
@@ -92,7 +92,7 @@
 }
 @media only screen and (max-width: 425px) {
 	.head {
-	background : #00FFFF;
+	background :#363636;
 	color : #b2b2b2;
 	height : 90px;
 	line-height : 90PX;

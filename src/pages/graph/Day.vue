@@ -2,7 +2,6 @@
   <div>
 	<!--为echarts准备一个具备大小的容器dom-->
 	<div id="main" style="width: 1200px;height: 400px;" class="geshi"></div>
-	{{ data }}
   </div>
 </template>
 <script>
@@ -14,113 +13,69 @@
 				data:[],
 			}
 		},
-		created:function () {
-			this.$axios.post('http://47.75.66.0:80/interview_api/price_time_series', {
-				type:'one_day',
-			})
-			.then(res => {
-				this.data = res.data;
-				this.tian();
+		methods:{
+			drawPie(id){
+				var data = [];
+				var now = +new Date(1997, 9, 3);
+				var oneDay = 24 * 3600 * 1000;
+				var value = Math.random() * 1000;
+				for (var i = 0; i < 1000; i++) {
+				    data.push(randomData());
+				}
+				function randomData() {
+				    now = new Date(+now + oneDay);
+				    value = value + Math.random() * 21 - 10;
+				    return {
+				        name: now.toString(),
+				        value: [
+				            [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+				            Math.round(value)
+				        ]
+				    }
+				}
+			 	this.charts = echarts.init(document.getElementById(id))
 				this.charts.setOption({
-					series: [{
-						data: this.data
-					}]
-				});
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+				    tooltip: {
+				        trigger: 'axis',
+				        formatter: function(params) {
+				            params = params[0];
+				            var date = new Date(params.name);
+				            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+				        },
+				        axisPointer: {
+				            animation: false
+				        }
+				    },
+				    xAxis: {
+				        type: 'time',
+				        splitLine: {
+				            show: false
+				        }
+				    },
+				    yAxis: {
+				        type: 'value',
+				        boundaryGap: [0, '100%'],
+				        position:'right',
+				        splitLine: {
+				            show: false
+				        }
+				    },
+				    series: [{
+				        name: '模拟数据',
+				        type: 'line',
+				        showSymbol: false,
+				        hoverAnimation: false,
+				        data: data
+				    }]
+			   })
+			},
 		},
-		// methods:{
-		// 	drawPie(id){
-		// 	 	this.charts = echarts.init(document.getElementById(id))
-		// 		this.charts.setOption({
-		// 		tooltip: {
-		// 			trigger: 'axis',
-		// 			formatter: function (params) {
-		// 				params = params[0];
-		// 				var date = new Date(params.value[0]);
-		// 				return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-		// 			},
-		// 			axisPointer: {
-		// 				animation: false
-		// 			}
-		// 		},
-		// 		xAxis: {
-		// 			type: 'time',
-		// 			splitLine: {
-		// 				show: false
-		// 			},
-		// 			maxInterval: 3600 * 1 * 1000,
-		// 			axisLabel: {
-	 //        	 		formatter: function (value, index) {
-		// 					var date = new Date(value);
-		// 					var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-		// 					var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-		// 					if(date.getHours() === 0 && date.getMinutes() === 0){
-		// 						return date.getMonth() + '.' + date.getDate() + '日';
-		// 					}else if(date.getHours()%3 === 0 && date.getMinutes() === 0){
-		// 						return hours + ':' + minutes;
-		// 					}
-		// 				},
-		// 			},
-		// 		},
-		// 		yAxis: {
-		// 			type: 'value',
-		// 			boundaryGap: [0, '100%'],
-		// 			position:'right'
-		// 		},
-		// 		series: [{
-		// 			name: '模拟数据',
-		// 			type: 'line',
-		// 			showSymbol: false,
-		// 			hoverAnimation: false,
-		// 			data: this.data
-		// 		}]
-		// 	   })
-		// 	},
-		// 	tian(){
-		// 		var $data = [];
-		// 		var $len = this.data.market_line.length;
-		// 		for(var $i=0; $i<$len; $i++){
-		// 			var $value = {
-		// 				value: [
-		// 					this.data.market_line[$i].timestamp,
-		// 					this.data.market_line[$i].price*1000
-		// 				]
-		// 			};
-		// 			$data.push($value);
-		// 		}
-		// 		this.data = $data;
-		// 	},
-		// 	getDatas(){
-		// 		let that = this;
-		// 		setInterval(function () {
-		// 			that.$axios.post('http://47.75.66.0:80/interview_api/price_time_series', {
-		// 				type:'one_day',
-		// 			 })
-		// 			 .then(res => {
-		// 				that.data = res.data;
-		// 				that.tian();
-		// 			 })
-		// 			 .catch(function (error) {
-		// 				console.log(error);
-		// 			 });
-		// 			that.charts.setOption({
-		// 				series: [{
-		// 					data: that.data
-		// 				}]
-		// 			});
-		// 		}, 1000*3600);
-		// 	},
-		// },
-		// //调用
-		// mounted(){
-		// 	this.$nextTick(function() {
-		// 		this.drawPie('main')
-		// 	})
-		// 	this.getDatas()
-		// }
+		//调用
+		mounted(){
+			this.$nextTick(function() {
+				this.drawPie('main')
+			})
+		}
 	}
 </script>
 <style scoped>
